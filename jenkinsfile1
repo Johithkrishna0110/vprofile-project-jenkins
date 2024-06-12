@@ -19,8 +19,8 @@ pipeline {
         SONARSCANNER = 'sonarscanner'
         MAVEN_HOME = '/usr/share/maven'
         MAVEN_OPTS = '-Dmaven.test.skip=true'
-        ARTIFACT_ID = 'your-artifact'
-        VERSION = '1.0.0'
+        ARTIFACT_ID = 'vprofile-v2'
+        VERSION = ''
         NEXUS_URL = 'http://54.237.90.228:8081/'
     }
 
@@ -95,8 +95,8 @@ pipeline {
                         -DgroupId=${REPO_GROUP} \
                         -DartifactId=${ARTIFACT_ID} \
                         -Dversion=${VERSION} \
-                        -Dpackaging=jar \
-                        -Dfile=target/${ARTIFACT_ID}-${VERSION}.jar \
+                        -Dpackaging=war \
+                        -Dfile=target/${ARTIFACT_ID}-${VERSION}.war \
                         -DrepositoryId=nexus \
                         -Durl=${NEXUS_URL} \
                         --settings ./settings.xml

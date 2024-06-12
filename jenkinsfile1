@@ -20,7 +20,6 @@ pipeline {
         MAVEN_HOME = '/usr/share/maven'
         MAVEN_OPTS = '-Dmaven.test.skip=true'
         ARTIFACT_ID = 'vprofile-v2'
-        VERSION = ''
         NEXUS_URL = 'http://54.237.90.228:8081/'
     }
 
@@ -96,7 +95,7 @@ pipeline {
                         -DartifactId=${ARTIFACT_ID} \
                         -Dversion=${VERSION} \
                         -Dpackaging=war \
-                        -Dfile=target/${ARTIFACT_ID}-${VERSION}.war \
+                        -Dfile=target/${ARTIFACT_ID}.war \
                         -DrepositoryId=nexus \
                         -Durl=${NEXUS_URL} \
                         --settings ./settings.xml

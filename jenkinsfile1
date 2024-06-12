@@ -93,7 +93,7 @@ pipeline {
                         ${MAVEN_HOME}/bin/mvn deploy:deploy-file \
                         -DgroupId=${REPO_GROUP} \
                         -DartifactId=${ARTIFACT_ID} \
-                        -Dversion=${VERSION} \
+                        -Dversion= \
                         -Dpackaging=war \
                         -Dfile=target/${ARTIFACT_ID}.war \
                         -DrepositoryId=nexus \

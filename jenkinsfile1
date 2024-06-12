@@ -21,6 +21,7 @@ pipeline {
         MAVEN_OPTS = '-Dmaven.test.skip=true'
         ARTIFACT_ID = 'your-artifact'
         VERSION = '1.0.0'
+        NEXUS_URL = 'http://54.237.90.228:8081/'
     }
 
     stages {

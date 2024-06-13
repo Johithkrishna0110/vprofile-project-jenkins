@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    environment {
+        // Use the configured Maven installation from Jenkins
+        MAVEN_HOME = '/usr/share/maven'
+        MAVEN_OPTS = '-Dmaven.test.skip=true'
+        NEXUS_URL = 'http://54.237.38.58:8081/'
+        NEXUS_CREDENTIALS_ID = 'nexuslogin'  // The ID of the Nexus credentials in Jenkins
+        REPO_GROUP = 'vpro-maven-group'
+        ARTIFACT_ID = 'vprofile'
+        VERSION = 'v2'
+    }
+
+    stages {
+        
+        stage('Upload to Nexus') {
+            steps {
+                script {
+                    // Define Nexus deployment settings
+                    withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        // Deploy the artifact to Nexus
+                        sh """
+                            ${MAVEN_HOME}/bin/mvn deploy:deploy-file \
+                            -DgroupId=${REPO_GROUP} \
+                            -DartifactId=${ARTIFACT_ID} \
+                            -Dversion=${VERSION} \
+                            -Dpackaging=war \
+                            -Dfile=target/${ARTIFACT_ID}-${VERSION}.war \
+                            -DrepositoryId=nexus \
+                            -Durl=${NEXUS_URL} \
+                            --settings ./settings.xml
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Cleanup actions
+            cleanWs()
+        }
+    }
+}

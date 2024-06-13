@@ -82,7 +82,7 @@ pipeline {
            }
         }
         
-        stage('Upload to Nexus') {
+        /* stage('Upload to Nexus') {
             steps {
                 script {
                     // Define Nexus deployment settings
@@ -102,7 +102,7 @@ pipeline {
                     """
                 }
             }
-        }
+        } */
 
        /* stage('NEXUS UPLOADER') {
             steps {
